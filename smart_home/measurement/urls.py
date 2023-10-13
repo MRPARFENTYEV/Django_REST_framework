@@ -1,5 +1,10 @@
 from django.urls import path
 
+from measurement.views import demo, create_sensor
+
+#
 urlpatterns = [
-    # TODO: зарегистрируйте необходимые маршруты
+path ('demo/',demo)
+('create_sensor', create_sensor),
+#     # TODO: зарегистрируйте необходимые маршруты
 ]
