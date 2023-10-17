@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from measurement.views import create_sensor, list_sensors, demo
+# from smart_home import views.demo 'этот вариант не работает
+from measurement.views import demo,list_sensors, create_sensor
+
 
 urlpatterns = [
+    # path(' ', views.demo), 'этот тоже
     path('admin/', admin.site.urls),
     path('api/', include('measurement.urls')),  # подключаем маршруты из приложения measurement
-    path('demo/',include('measurement.urls'))]
+    # path('demo/', include('measurement.urls')),
+    path('list_sensors/', list_sensors),
+    path('demo/', demo),
+    path('create_sensor/',create_sensor)
+]

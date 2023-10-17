@@ -1,10 +1,10 @@
 from django.urls import path
-
-from measurement.views import demo, create_sensor
+from measurement.views import create_sensor, list_sensors, demo
 
 #
 urlpatterns = [
-path ('demo/',demo)
-('create_sensor', create_sensor),
-#     # TODO: зарегистрируйте необходимые маршруты
+    path('demo/', demo),
+    path('create_sensor/', create_sensor),
+    path('list_sensors/', list_sensors)
 ]
+

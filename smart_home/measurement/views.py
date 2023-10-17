@@ -1,24 +1,41 @@
 # TODO: опишите необходимые обработчики, рекомендуется использовать generics APIView классы:
 # TODO: ListCreateAPIView, RetrieveUpdateAPIView, CreateAPIView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from measurement.models import Sensor
+from measurement.models import Sensor, Measurements
+from measurement.serializers import DemoSerializer, MeasurementsSerializer
 
 
 #
 
 
-
+@api_view(['POST'])
 def create_sensor(request):
     if request.method == 'POST':
         sensor = Sensor()
         sensor.name = request.Post.get('name')
         sensor.description = request.Post.get('description')
         sensor.save()
-    return HttpResponseRedirect('/')
+        print(request)
+    return Response('Модель создана')
+@api_view(['GET'])
+def list_sensors(request):
+    sensor_objects = Sensor.objects.all()
+    return Response(sensor_objects)
+    # for sensor in sensor_objects:
+    #     return Response(sensor)
 
-@api_view
+@api_view(['GET'])
 def demo(request):
-    data={'massage':'Hello'}
-    return Response(data)
+    # data = {'massage': 'Hello'}
+    sens = Sensor.objects.all()
+    measur = Measurements.objects.all()
+    ser =DemoSerializer(sens, many=True)
+    mes =MeasurementsSerializer(measur, many=True)
+    print('__________________')
+
+    return Response(ser.data,mes.data)
+
+
+
