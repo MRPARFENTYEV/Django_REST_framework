@@ -5,7 +5,7 @@ from .models import Measurements, Sensor
 
 
 @admin.register(Measurements)
-class StudentAdmin(admin.ModelAdmin):
+class MesAdmin(admin.ModelAdmin):
     pass
 # class RelationshipInline(admin.TabularInline):
 #     model = Measurements

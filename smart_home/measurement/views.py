@@ -21,21 +21,14 @@ def create_sensor(request):
     return Response('Модель создана')
 @api_view(['GET'])
 def list_sensors(request):
-    sensor_objects = Sensor.objects.all()
-    return Response(sensor_objects)
-    # for sensor in sensor_objects:
-    #     return Response(sensor)
-
-@api_view(['GET'])
-def demo(request):
-    # data = {'massage': 'Hello'}
     sens = Sensor.objects.all()
     measur = Measurements.objects.all()
-    ser =DemoSerializer(sens, many=True)
-    mes =MeasurementsSerializer(measur, many=True)
-    print('__________________')
+    ser = DemoSerializer(sens, many=True)
+    mes = MeasurementsSerializer(measur, many=True)
+    return Response([ser.data, mes.data])
 
-    return Response(ser.data,mes.data)
+
+
 
 
 

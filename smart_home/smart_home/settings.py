@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'smart_home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Django_rest_framework',
+        'NAME': 'django_rest_framework_',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'USER': 'postgres',
