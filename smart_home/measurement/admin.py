@@ -20,6 +20,3 @@ class ObjectAdmin(admin.ModelAdmin):
 
 
 
-
-
-    # formset = [RelationshipInlineFormset]
