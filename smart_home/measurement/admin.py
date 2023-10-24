@@ -14,8 +14,10 @@ class MesAdmin(admin.ModelAdmin):
 
 @admin.register(Sensor)
 class ObjectAdmin(admin.ModelAdmin):
+    list_filter = ['id', 'name', 'description']
+    # list_filter = ['id','name','description','measurement']
     # inlines = [RelationshipInline]
-    pass
+
 
 
 

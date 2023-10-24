@@ -80,8 +80,10 @@ WSGI_APPLICATION = 'smart_home.wsgi.application'
 
 DATABASES = {
     'default': {
+# 'NAME': 'django_rest_framework_'
+# 'NAME': 'serializer_m2m',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_rest_framework_',
+        'NAME': 'Django_drf',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'USER': 'postgres',

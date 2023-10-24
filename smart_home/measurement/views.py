@@ -54,18 +54,24 @@ class SensorListView(generics.ListAPIView):
     '''Выводит список датчиков'''
     queryset = Sensor.objects.all()
     serializer_class = SensorListSerializer
-class SensorDetailListView(generics.RetrieveAPIView):
+class SensorDetailView(APIView):
     '''Выводит один датчик по id'''
 
-    # def get(self, request ,pk):
-        # sensor = Sensor.objects.get(id=pk)
-        # serializer = SensorDetailListSerializer(sensor)
-        # return Response(serializer.data)
+    def get(self, request ,pk):
+        sensor = Sensor.objects.get(id=pk)
+        serializer = SensorDetailListSerializer(sensor)
+        return Response(serializer.data)
+    #
+    # def get_2(self, request ,pk):
+    #     mes = Measurements.objects.get(id=pk)
+    #     serializer = MeasurementDetailListSerializer(mes)
+    #     return Response(serializer.data)
+# class SensorDetailListView(generics.RetrieveAPIView):
+    # queryset = Sensor.objects.all()
+    # serializer_class = SensorDetailListSerializer
 
-    queryset = Sensor.objects.all()
-    serializer_class = SensorDetailListSerializer
 
-class MeasurementDetailListView(generics.RetrieveAPIView):
+class MeasurementDetailView(generics.RetrieveAPIView):
     '''Выводит описание ондного измерения по id'''
 
     # def get(self, request ,pk):

@@ -18,7 +18,7 @@ from django.urls import path, include
 
 
 # from smart_home import views.demo 'этот вариант не работает
-from measurement.views import (SensorListView, SensorDetailListView, MeasurementsListView,MeasurementDetailListView,
+from measurement.views import (SensorListView, SensorDetailView, MeasurementsListView,MeasurementDetailView,
                                CreateSensor)
 
 urlpatterns = [
@@ -27,9 +27,9 @@ urlpatterns = [
     path('api/', include('measurement.urls')),  # подключаем маршруты из приложения measurement
     # path('demo/', include('measurement.urls')),
     path('list_sensors/', SensorListView.as_view()),
-    path('SensorDetailListView/<int:pk>/', SensorDetailListView.as_view()),
+    path('SensorDetailView/<int:pk>/', SensorDetailView.as_view()),
     path('MeasurementsSerializer/', MeasurementsListView.as_view()),
-    path('MeasurementDetailListSerializer/<int:pk>/',MeasurementDetailListView.as_view()),
+    path('MeasurementDetailView/<int:pk>/',MeasurementDetailView.as_view()),
     path('CreateSensor/',CreateSensor.as_view())
 
     # path('create_sensor/',create_sensor)
