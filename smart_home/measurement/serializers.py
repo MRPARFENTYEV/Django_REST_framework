@@ -33,7 +33,7 @@ class SensorListSerializer(serializers.ModelSerializer):
         # measurement = ForeignKey(Measurements, related_name='measurmeasurementements', on_delete=model.CASCADE) TO DO: разобраться с этой строчкой
 class MeasurementDetailListSerializer(serializers.ModelSerializer):
     '''Выводит одну запись измерений по id'''
-    # sensor = SensorListSerializer(read_only=True)# работает при внешнем ключе в measurement
+    sensor = SensorListSerializer(read_only=True)# работает при внешнем ключе в measurement
     class Meta:
         model = Measurements
         # exclude = ()
@@ -42,8 +42,10 @@ class MeasurementDetailListSerializer(serializers.ModelSerializer):
 
 class SensorDetailListSerializer(serializers.ModelSerializer):
     '''Выводит один датччик с измерениями по id'''
-    measurements = MeasurementsSerializer(read_only=True)
-    # measurements = serializers.SlugRelatedField(slug_field="created_at",read_only=True)
+    # measurements = MeasurementDetailListSerializer( read_only=True)
+    # measurements = serializers.SlugRelatedField(slug_field="created_at",read_only=True, many=True)
+    '''measurements = serializers.StringRelatedField(many=True)'''
+    measurements = MeasurementsSerializer(read_only=True, many=True)
 
 
     # measurement = serializers.PrimaryKeyRelatedField(queryset=Measurements.objects.all())
@@ -59,7 +61,7 @@ class SensorDetailListSerializer(serializers.ModelSerializer):
 class CreateSensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields =('name','description')
+        fields = '__all__'
 
 
 

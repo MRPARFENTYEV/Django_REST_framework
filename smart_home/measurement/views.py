@@ -59,6 +59,7 @@ class SensorDetailView(APIView):
 
     def get(self, request ,pk):
         sensor = Sensor.objects.get(id=pk)
+
         serializer = SensorDetailListSerializer(sensor)
         return Response(serializer.data)
     #
@@ -91,7 +92,7 @@ class CreateSensor(APIView):
         create_sensor = CreateSensorSerializer(data=request.data)
         if create_sensor.is_valid():
             create_sensor.save()
-        return Response(Status=201)
+        return Response(status=201)
 
 
 
