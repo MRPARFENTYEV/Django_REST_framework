@@ -23,12 +23,24 @@ from measurement.models import Sensor, Measurements
 class MeasurementsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Measurements
-        fields = ['temperature','created_at']
+        # fields = ['temperature','created_at']
+        fields = '__all__'
+        def create(self, validated_data):
+            return Measurements.objects.create(**validated_data)
+        # def update(self, instance, validated_data):
+        #     instance.sensor = validated_data.get('sensor', instance.sensor)
+        #     instance.temperature = validated_data.get('temperature',instance.temperature)
+        #     instance.created_at = validated_data.get('created_at',instance.created_at)
+        #
+        #     instance.save()
+        #     return instance
+
 
 class SensorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ('name', 'description')
+        fields = "__all__"
+        # fields = ('name', 'description')
 
         # measurement = ForeignKey(Measurements, related_name='measurmeasurementements', on_delete=model.CASCADE) TO DO: разобраться с этой строчкой
 class MeasurementDetailListSerializer(serializers.ModelSerializer):
@@ -62,6 +74,15 @@ class CreateSensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
         fields = '__all__'
+        def create(self, validated_data):
+            return Sensor.objects.create(**validated_data)
+
+        def update(self, instance, validated_data):
+            instance.name = validated_data.get('name',instance.name)
+            instance.descritpion = validated_data.get('description',instance.descritpion)
+            instance.save()
+            return instance
+
 
 
 

@@ -50,6 +50,7 @@ class MeasurementsListView(generics.ListAPIView):
     queryset = Measurements.objects.all()
     serializer_class = MeasurementsSerializer
 
+
 class SensorListView(generics.ListAPIView):
     '''Выводит список датчиков'''
     queryset = Sensor.objects.all()
@@ -87,12 +88,35 @@ class MeasurementDetailView(generics.RetrieveAPIView):
     # measur = Measurements.objects.all()
     # ser = DemoSerializer(sens, many=True)
     # mes = MeasurementsSerializer(measur, many=True)
+class add_measurement(APIView):
+    def post(self, request):
+        serializer = MeasurementsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'post': serializer.data})
+
 class CreateSensor(APIView):
     def post(self, request):
-        create_sensor = CreateSensorSerializer(data=request.data)
-        if create_sensor.is_valid():
-            create_sensor.save()
-        return Response(status=201)
+        serializer = CreateSensorSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'post': serializer.data})
+
+    def put(self,request,*args,**kwargs):
+        pk = kwargs.get("pk",None)
+        if not pk:
+            return Response({"error": "Method put is not allowed"})
+        try:
+            instance = Sensor.objects.get(pk=pk)
+        except:
+            return Response({"error": "Method put is not allowed"})
+        serializer = CreateSensorSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"post": serializer.data})
+
+
+
 
 
 
