@@ -9,8 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
+load_dotenv()
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9m2%u2yq=+#)6c#^j7^1p+@mpiob-r)9ki+zrv%*ad779fz89l'
+SECRET_KEY = os.environ.get("SECRET_KEY")[::]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG")[::]
 
 ALLOWED_HOSTS = []
 
@@ -78,20 +82,18 @@ WSGI_APPLICATION = 'smart_home.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = os.environ.get("db_DATABASES")[::]
 DATABASES = {
     'default': {
-# 'NAME': 'django_rest_framework_'
-# 'NAME': 'serializer_m2m',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Django_drf',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        'USER': 'postgres',
-        'PASSWORD': 'Sqlzaebal'
+        'ENGINE': os.environ.get("ENGINE")[::],
+        'NAME': os.environ.get("NAME")[::],
+        'HOST': os.environ.get("HOST")[::],
+        'PORT': os.environ.get("PORT")[::],
+        'USER': os.environ.get("USER")[::],
+        'PASSWORD': os.environ.get("PASSWORD")[::]
 
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -22,10 +22,8 @@ from measurement.views import (SensorListView, SensorDetailView, MeasurementsLis
                                CreateSensor,add_measurement)
 
 urlpatterns = [
-    # path(' ', views.demo), 'этот тоже
     path('admin/', admin.site.urls),
     path('api/', include('measurement.urls')),  # подключаем маршруты из приложения measurement
-    # path('demo/', include('measurement.urls')),
     path('list_sensors/', SensorListView.as_view()), # просмотреть все датчики
     path('SensorDetailView/<int:pk>/', SensorDetailView.as_view()),# посмотреть детальную информацию по датчику( указать id)
     path('MeasurementsSerializer/', MeasurementsListView.as_view()),# просмотреть все датчики измерения
@@ -33,7 +31,4 @@ urlpatterns = [
     path('CreateSensor/',CreateSensor.as_view()),# добавить датчик
     path('UpdateSensor/<int:pk>/',CreateSensor.as_view()),# обновить датчик
     path('add_measurements/', add_measurement.as_view()) # добавить измерения
-
-
-    # path('create_sensor/',create_sensor)
 ]
